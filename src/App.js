@@ -3,6 +3,7 @@ import { Component } from './core/heropy';
 
 export default class App extends Component {
   render() {
-    this.el.append(new TheHeader().el);
+    const routerView = document.createElement("router-view");
+    this.el.append(new TheHeader().el, routerView);
   }
 }

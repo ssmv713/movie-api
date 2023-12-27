@@ -6,10 +6,11 @@ export default class TheHeader extends Component {
       tagName: "header",
     });
   }
-  header() {
+  render() {
     this.el.innerHTML = /* html */ `
      <a href="#/">Main!</a>
      <a href="#/about">About!</a>
     `;
+    console.log("header");
   }
 }
