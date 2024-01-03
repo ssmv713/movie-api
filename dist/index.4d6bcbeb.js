@@ -589,7 +589,8 @@ var _theHeaderDefault = parcelHelpers.interopDefault(_theHeader);
 var _heropy = require("./core/heropy");
 class App extends (0, _heropy.Component) {
     render() {
-        this.el.append(new (0, _theHeaderDefault.default)().el);
+        const routerView = document.createElement("router-view");
+        this.el.append(new (0, _theHeaderDefault.default)().el, routerView);
     }
 }
 exports.default = App;
@@ -634,24 +635,24 @@ function createRouter(routes) {
             routeRender(routes);
         });
         routeRender(routes);
+        console.log("router");
     };
 }
 class Store {
     constructor(state){
         this.state = {};
-        this.observers = {};
+        // this.observers = {};
         for(const key in state)Object.defineProperty(this.state, key, {
             get: ()=>state[key],
             set: (val)=>{
                 console.log(val);
-                this.observers[key]();
             // this.observers[key]();
             }
         });
     }
     subscribe(key, cb) {
-        //상태가 변하는지 아닌지 구독을 통해서 감시
-        this.observers[key] = cb;
+    //상태가 변하는지 아닌지 구독을 통해서 감시
+    // this.observers[key] = cb;
     }
 }
 
@@ -695,7 +696,7 @@ class TheHeader extends (0, _heropy.Component) {
             tagName: "header"
         });
     }
-    header() {
+    render() {
         this.el.innerHTML = /* html */ `
      <a href="#/">Main!</a>
      <a href="#/about">About!</a>
