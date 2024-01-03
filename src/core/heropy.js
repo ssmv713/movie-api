@@ -47,13 +47,20 @@ export function createRouter(routes) {
 export class Store {
   constructor(state) {
     this.state = {};
+    this.observers = {};
     for (const key in state) {
-      Objecy.defineProperty(this.state, key, {
-        get: () => state[key],
+      Object.defineProperty(this.state, key, {
+        get: () => state[key], //state['messsage']
         set: (val) => {
           console.log(val);
+          this.observers[key]();
+          // this.observers[key]();
         },
       });
     }
+  }
+  subscribe(key, cb) {
+    //상태가 변하는지 아닌지 구독을 통해서 감시
+    this.observers[key] = cb;
   }
 }
